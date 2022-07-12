@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>Deposit</p>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">
+      Submit
+    </button>
+</form>
+<a href="{% url 'atm:actions' account.account_number%}">Back to Actions</a>
+{% endblock %}

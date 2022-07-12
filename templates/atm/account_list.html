@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if card_account_pair_list %}
+    <ul>
+    {% for pair in card_account_pair_list %}
+        <li><a href="{% url 'atm:actions' pair.account.account_number%}">{{ pair.account.account_number }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No accounts</p>
+{% endif %}
+{% endblock %}

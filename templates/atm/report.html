@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>Deposit/Withdraw History of Account {{account.account_number}} :</p>
+<p>Deposit</p>
+{% if deposit_list %}
+    <ul>
+    {% for deposit in deposit_list %}
+    <p>Amount: +{{deposit.amount}} Balance: {{deposit.balance}} Time: {{deposit.timestamp}}</p>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No history</p>
+{% endif %}
+
+<p>Withdraw</p>
+{% if withdraw_list %}
+    <ul>
+    {% for withdraw in withdraw_list %}
+    <p>Amount: -{{withdraw.amount}} Balance: {{withdraw.balance}} Time: {{withdraw.timestamp}}</p>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No history</p>
+{% endif %}
+<a href="{% url 'atm:actions' account.account_number%}">Back to Actions</a>
+{% endblock %}

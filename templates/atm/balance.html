@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>Balance on account {{account.account_number}} :</p>
+<p>{{account.balance}}</p>
+<a href="{% url 'atm:actions' account.account_number%}">Back to Actions</a>
+{% endblock %}
