@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<p>Select Account</p>
 {% if card_account_pair_list %}
     <ul>
     {% for pair in card_account_pair_list %}
@@ -9,4 +10,5 @@
 {% else %}
     <p>No accounts</p>
 {% endif %}
+<a href="{% url 'atm:card_main' %}">Back to Main</a>
 {% endblock %}
