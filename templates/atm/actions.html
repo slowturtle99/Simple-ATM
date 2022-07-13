@@ -4,7 +4,7 @@
     <li><a href="{% url 'atm:show_balance' account.account_number%}">Balance</a></li>
     <li><a href="{% url 'atm:deposit_money' account.account_number%}">Deposit</a></li>
     <li><a href="{% url 'atm:withdraw_money' account.account_number%}">Withdraw</a></li>
-    <li><a href="{% url 'atm:report_transactions' account.account_number%}">Report</a></li>
+    <li><a href="{% url 'atm:transaction_history' account.account_number%}">Transaction history</a></li>
 </ul>
-<a href="{% url 'atm:card' %}">Back to Main</a>
+<a href="{% url 'atm:card_main' %}">Back to Main</a>
 {% endblock %}

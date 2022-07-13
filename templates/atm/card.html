@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <p>Card</p>
-<form action = "{% url 'atm:card_find' %}">
+<form action = "{% url 'atm:card_check' %}">
 Card number: <input type="text" name="card_number">
 <br>
 PIN number: <input type="text" name="pin_number">
