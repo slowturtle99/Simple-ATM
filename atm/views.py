@@ -6,11 +6,24 @@ from .forms import DepositForm, WithdrawForm
 
 
 def card_main(request):
+    """
+    Renders the main page of the atm.
+
+    """
     context = None
     return render(request, 'atm/card.html', context)
 
 
 def card_check(request):
+    """
+    Get the card informations and check pin numbers.
+    Redirect to account list.
+
+    Todo:
+        To implement real atm system card informations should be obtained 
+        from the card reader device of ATM.
+
+    """
     card_number = request.GET['card_number']
     pin_number = request.GET['pin_number']
     if pin_check(card_number, pin_number):
@@ -19,12 +32,33 @@ def card_check(request):
 
 
 def pin_check(card_number, pin_number):
+    """
+    Check PIN number is correct or not.
+    This is temporal implementaion.
+    PIN number is correct if it is same as last four number of the card number. 
+
+    Args:
+        card_number (str): Card number.
+        pin_number (str): PIN number.
+
+    Todo:
+        Implement authentication using bank API.
+
+
+    """
     if pin_number == card_number[-4:]:
         return True
     return False
 
 
 def list_accounts(request, card_number):
+    """
+    Shows the list of accounts linked to the card.
+
+    Args:
+        card_number (str): Card number.
+
+    """
     card = get_object_or_404(Card, card_number=card_number)
     card_account_pair_list = card.cardaccountpair_set.all()
     context = {'card_account_pair_list': card_account_pair_list}
@@ -32,18 +66,39 @@ def list_accounts(request, card_number):
 
 
 def select_action(request, account_number):
+    """
+    Shows the possible actions for the account.
+
+    Args:
+        account_number (str): Account number.
+
+    """
     account = get_object_or_404(Account, account_number=account_number)
     context = {'account': account}
     return render(request, 'atm/actions.html', context)
 
 
 def balance(request, account_number):
+    """
+    Shows the balance of the account.
+
+    Args:
+        account_number (str): Account number.
+
+    """
     account = get_object_or_404(Account, account_number=account_number)
     context = {'account': account}
     return render(request, 'atm/balance.html', context)
 
 
 def deposit_money(request, account_number):
+    """
+    Deposit money into account.
+
+    Args:
+        account_number (str): Account number.
+
+    """
     account = get_object_or_404(Account, account_number=account_number)
     if request.method == 'POST':
         form = DepositForm(request.POST)
@@ -64,6 +119,13 @@ def deposit_money(request, account_number):
 
 
 def withdraw_money(request, account_number):
+    """
+    Withdraw money from account.
+
+    Args:
+        account_number (str): Account number.
+
+    """
     account = get_object_or_404(Account, account_number=account_number)
     if request.method == 'POST':
         form = WithdrawForm(request.POST)
@@ -84,6 +146,13 @@ def withdraw_money(request, account_number):
 
 
 def transaction_history(request, account_number):
+    """
+    Shows the transaction history of the account.
+
+    Args:
+        account_number (str): Account number.
+
+    """
     account = get_object_or_404(Account, account_number=account_number)
     deposit_list = account.deposit_set.order_by('timestamp')
     withdraw_list = account.withdraw_set.order_by('timestamp')

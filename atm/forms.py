@@ -3,6 +3,13 @@ from .models import Deposit, Withdraw
 
 
 class DepositForm(forms.ModelForm):
+    """
+    Form for Deposit model.
+
+    Fields:
+        amount (int): Amount of money to deposit.
+
+    """
     class Meta:
         model = Deposit
         fields = ['amount']
@@ -11,6 +18,13 @@ class DepositForm(forms.ModelForm):
         }
 
 class  WithdrawForm(forms.ModelForm):
+    """
+    Form for Deposit model.
+
+    Fields:
+        amount (int): Amount of money to deposit.
+
+    """
     class Meta:
         model =  Withdraw
         fields = ['amount']
